@@ -19,3 +19,7 @@ services:
     environment:
       - xpack.monitoring.enabled=false
       - ELASTICSEARCH_URL=http://es:9200
+      
+volumes:
+    es_data:
+     
