@@ -12,7 +12,7 @@ services:
       - xpack.monitoring.enabled=false
       
   logstash: 
-   image: logstash
+   image: docker.elastic.co/logstash
    ports:
     - 10514
    restart: always
