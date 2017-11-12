@@ -13,6 +13,8 @@ services:
       
   logstash: 
    image: logstash
+   ports:
+    - 10514
    restart: always
    environment:
       - xpack.monitoring.enabled=false
