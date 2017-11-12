@@ -2,14 +2,14 @@ version: "3"
 services: 
   es: 
     image: elasticsearch
+    volumes:  
+      - es_data:/usr/share/elasticsearch/data
     ports: 
       - 9200
       - 9300
     restart: always
   environment: 
     - xpack.monitoring.enabled=false
-  volumes:  
-   - es_data:/usr/share/elasticsearch/data
 
   kibana: 
     image: kibana
