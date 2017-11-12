@@ -19,7 +19,13 @@ services:
     environment:
       - xpack.monitoring.enabled=false
       - ELASTICSEARCH_URL=http://es:9200
-      
+
+  logstash: 
+   image: logstash
+   restart: always
+   environment:
+      - xpack.monitoring.enabled=false
+   
 volumes:
     es_data:
      
