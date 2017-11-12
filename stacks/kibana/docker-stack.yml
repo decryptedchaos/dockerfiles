@@ -8,8 +8,8 @@ services:
       - 9200
       - 9300
     restart: always
-  environment: 
-    - xpack.monitoring.enabled=false
+    environment: 
+      - xpack.monitoring.enabled=false
 
   kibana: 
     image: kibana
