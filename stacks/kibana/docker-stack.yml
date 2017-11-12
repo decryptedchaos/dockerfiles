@@ -16,6 +16,6 @@ services:
     ports: 
       - 5601
     restart: always
-    environment: 
-      ELASTICSEARCH_URL: "http://es:9200"
+    environment:
       - xpack.monitoring.enabled=false
+      - ELASTICSEARCH_URL=http://es:9200
