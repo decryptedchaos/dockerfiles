@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+   es:
+     image: elasticsearch
+	 ports:
+	  - 9200
+	  - 9300
+	 restart: always
+	 environment:
+	 	xpack.monitoring.enabled: false
+
+
+   kibana:
+     image: kibana
+     ports:
+       - 5601
+     restart: always
+	 environment:
+	 	xpack.monitoring.enabled: false
+		ELASTICSEARCH_URL: http://es:9200
