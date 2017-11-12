@@ -1,18 +1,21 @@
+version: "3"
 services: 
-  environment: 
-    xpack.monitoring.enabled: false
   es: 
     image: elasticsearch
     ports: 
       - 9200
       - 9300
+    restart: always
+  environment: 
+    XPACK.MONITORING.ENABLED: 'false'
+  volumes:  
+   - es_data:/usr/share/elasticsearch/data
+
   kibana: 
-    environment: 
-      ELASTICSEARCH_URL: "http://es:9200"
-      xpack.monitoring.enabled: false
     image: kibana
     ports: 
       - 5601
     restart: always
-  restart: always
-version: "3"
+    environment: 
+      ELASTICSEARCH_URL: "http://es:9200"
+      XPACK.MONITORING.ENABLED: 'false'
