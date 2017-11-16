@@ -9,25 +9,42 @@ services:
       - 9300
     restart: always
     environment: 
-      - xpack.monitoring.enabled=false
+      - xpack.monitoring.enabled=true
       
   logstash: 
    image: docker.elastic.co/logstash/logstash:5.6.4
    ports:
-    - 10514
+    - 5000
+    - 5000/udp
    restart: always
    environment:
-      - xpack.monitoring.enabled=false
+      - xpack.monitoring.enabled=true
+   configs:
+      - source: 00-input-syslog.conf
+        target: /usr/share/logstash/pipeline/00-input-syslog.conf
+      - source: 90-output-elasticsearch.conf
+        target: /usr/share/logstash/pipeline/90-output-elasticsearch.conf
 
   kibana: 
     image: docker.elastic.co/kibana/kibana:5.6.4
-    ports: 
-      - 5601
+    deploy:
+      labels:
+      - "traefik.backend=kibana"
+      - "traefik.docker.network=traefik-net"
+      - "traefik.frontend.rule=Host:kibana.fluidservers.net"
+      - "traefik.enable=true"
+      - "traefik.port=5601"
+    networks:
+     - traefik-net
+     - default
     restart: always
     environment:
-      - xpack.monitoring.enabled=false
+      - xpack.monitoring.enabled=true
       - ELASTICSEARCH_URL=http://es:9200
    
 volumes:
     elastic_data:
-     
+networks:
+  traefik-net:
+    external: true
+  default:
