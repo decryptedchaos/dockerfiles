@@ -51,6 +51,6 @@ networks:
 
 configs:
   00-input-syslog.conf:
-    file: ./00-input-syslog.conf
+    external: true
   90-output-elasticsearch.conf:
-    file: ./90-output-elasticsearch.conf
+    external: true
